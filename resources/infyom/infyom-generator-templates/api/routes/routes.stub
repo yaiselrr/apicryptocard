@@ -1,0 +1,8 @@
+Route::prefix('/$MODEL_NAME_PLURAL_CAMEL$')->group(function(){
+    Route::get('/', '$MODEL_NAME$Controller@index')->name('MODULO.$MODEL_NAME_PLURAL_CAMEL$.index');
+    Route::get('/{id}', '$MODEL_NAME$Controller@show')->name('MODULO.$MODEL_NAME_PLURAL_CAMEL$.show');
+    Route::get('/filter', '$MODEL_NAME$Controller@filter')->name('MODULO.$MODEL_NAME_PLURAL_CAMEL$.filter');
+    Route::post('/', '$MODEL_NAME$Controller@store')->name('MODULO.$MODEL_NAME_PLURAL_CAMEL$.store');
+    Route::put('/{id}', '$MODEL_NAME$Controller@update')->name('MODULO.$MODEL_NAME_PLURAL_CAMEL$.update');
+    Route::delete('/{id}', '$MODEL_NAME$Controller@destroy')->name('MODULO.$MODEL_NAME_PLURAL_CAMEL$.destroy');
+});

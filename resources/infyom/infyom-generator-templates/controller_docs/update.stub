@@ -1,0 +1,51 @@
+/**
+     * @param int $id
+     * @param Update$MODEL_NAME$APIRequest $request
+     * @return Response
+     *
+     * @OA\Put(
+     *      path="/v1/MODULO/$MODEL_NAME_PLURAL_CAMEL$/{id}",
+     *      summary="Update the specified $MODEL_NAME$ in storage",
+     *      tags={"$MODEL_NAME$"},
+     *      description="Update $MODEL_NAME$",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of $MODEL_NAME$",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *           mediaType="application/json",
+     *            @OA\Schema(
+     *                type="object",
+     *                ref="#/components/schemas/$MODEL_NAME$"
+     *            )
+     *         )
+     *      ),
+       *      @OA\Response(
+       *         response="200",
+       *         description="ok",
+       *         content={
+       *             @OA\MediaType(
+       *                 mediaType="application/json",
+       *                 @OA\Schema(
+       *                     @OA\Property(
+       *                         property="success",
+       *                         type="boolean"
+       *                     ),
+       *                      @OA\Property(
+       *                          property="data",
+       *                          ref="#/components/schemas/$MODEL_NAME$"
+       *                      ),
+       *                      @OA\Property(
+       *                          property="message",
+       *                          type="string"
+       *                      )
+       *                 )
+       *             )
+       *         }
+       *     )
+     * )
+     */

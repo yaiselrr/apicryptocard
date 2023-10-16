@@ -1,0 +1,50 @@
+ /**
+      * @param int $id
+      * @return Response
+      *
+      * @SWG\Delete(
+      *      path="/v1/MODULO/$MODEL_NAME_PLURAL_CAMEL$/{id}",
+      *      summary="Elimina un $MODEL_NAME$ en especifico de la bd",
+      *      tags={"$MODEL_NAME$"},
+      *      description="Elimina un $MODEL_NAME$",
+      *      produces={"application/json"},
+      *      @SWG\Parameter(
+      *          name="id",
+      *          description="id del $MODEL_NAME$",
+      *          type="integer",
+      *          required=true,
+      *          in="path"
+      *      ),
+      *      @SWG\Response(
+      *          response=200,
+      *          description="operacion exitosa",
+      *          @SWG\Schema(
+      *              type="object",
+      *              @SWG\Property(
+      *                  property="type",
+      *                  type="string"
+      *              ),
+      *              @SWG\Property(
+      *                  property="message",
+      *                  type="string"
+      *              )
+      *          )
+      *      ),
+      *     @SWG\Response(
+      *         response=401,
+      *         description="Accion no autorizada",
+      *     ),
+      *     @SWG\Response(
+      *         response=404,
+      *         description="$MODEL_NAME$ no existente",
+      *     ),
+      *     @SWG\Response(
+      *         response=422,
+      *         description="Parametro con errores",
+      *     ),
+      *     @SWG\Response(
+      *         response=500,
+      *         description="Error interno en el servidor",
+      *     )
+      * )
+      */

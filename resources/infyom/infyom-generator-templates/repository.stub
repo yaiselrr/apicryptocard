@@ -1,0 +1,31 @@
+<?php
+
+namespace $NAMESPACE_REPOSITORY$;
+
+use $NAMESPACE_MODEL$\$MODEL_NAME$;
+use App\Http\Controllers\Helpers\HelperFunctions;
+use \Prettus\Repository\Eloquent\BaseRepository as BaseRepository;
+
+class $MODEL_NAME$Repository extends BaseRepository
+{
+    /**
+     * @var array
+     */
+    protected $fieldSearchable = [
+        $FIELDS$
+    ];
+
+    /**
+     * Configure the Model
+     **/
+    public function model()
+    {
+        return $MODEL_NAME$::class;
+    }
+
+    public function filtro($filter = [], $orderBy = 'created_at', $direction = 'ASC', $paginate = 10){
+        $query = $MODEL_NAME$::query();
+        $query = HelperFunctions::construirQuerysFiltros($filter, $orderBy, $direction, $query);
+        return $query->paginate($paginate);
+    }
+}

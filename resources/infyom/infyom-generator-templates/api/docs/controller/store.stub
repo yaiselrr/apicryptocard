@@ -1,0 +1,49 @@
+/**
+  * @param $MODEL_NAME$Request $request
+  * @return Response
+  *
+  * @SWG\Post(
+  *      path="/v1/MODULO/$MODEL_NAME_PLURAL_CAMEL$",
+  *      summary="Crea un nuevo $MODEL_NAME$ en la bd",
+  *      tags={"$MODEL_NAME$"},
+  *      description="Crea un $MODEL_NAME$",
+  *      @SWG\Parameter(
+  *          name="body",
+  *          in="query",
+  *          description="$MODEL_NAME$ que va a ser creado",
+  *          required=true,
+  *          @SWG\Schema(ref="#/definitions/$MODEL_NAME$")
+  *      ),
+  *      @SWG\Response(
+  *          response=201,
+  *          description="operacion exitosa",
+  *          @SWG\Schema(
+  *              type="object",
+  *              @SWG\Property(
+  *                  property="type",
+  *                  type="string"
+  *              ),
+  *              @SWG\Property(
+  *                  property="object",
+  *                  ref="#/definitions/$MODEL_NAME$"
+  *              ),
+  *              @SWG\Property(
+  *                  property="message",
+  *                  type="string"
+  *              )
+  *          )
+  *      ),
+  *     @SWG\Response(
+  *         response=401,
+  *         description="Accion no autorizada",
+  *     ),
+  *     @SWG\Response(
+  *         response=422,
+  *         description="Parametro con errores",
+  *     ),
+  *     @SWG\Response(
+  *         response=500,
+  *         description="Error interno en el servidor",
+  *     )
+  * )
+  */

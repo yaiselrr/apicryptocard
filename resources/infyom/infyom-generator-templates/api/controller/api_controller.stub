@@ -1,0 +1,141 @@
+<?php
+
+namespace $NAMESPACE_CONTROLLER$;
+
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use $NAMESPACE_REQUEST$\$MODEL_NAME$Request;
+use $NAMESPACE_REPOSITORY$\$MODEL_NAME$Repository;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
+
+$DOC_CONTROLLER$
+class $MODEL_NAME$Controller extends AppBaseController
+{
+    /** @var  $MODEL_NAME$Repository */
+    private $$MODEL_NAME_CAMEL$Repository;
+
+    public function __construct($MODEL_NAME$Repository $$MODEL_NAME_CAMEL$Repo)
+    {
+        $this->$MODEL_NAME_CAMEL$Repository = $$MODEL_NAME_CAMEL$Repo;
+    }
+
+    $DOC_INDEX$
+    public function index(Request $request)
+    {
+        $$MODEL_NAME_PLURAL_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->all();
+
+        return response()->json(['data'=>$$MODEL_NAME_PLURAL_CAMEL$], 200);
+    }
+
+     public function filter(Request $request)
+        {
+            $filter = $request->filter ? json_decode($request->filter) : [];
+            $orderBy = $request->orderBy ? $request->orderBy :'created_at';
+            $direction = $request->direction ? $request->direction :'ASC';
+            $paginate = 10;
+            if (!empty($request['paginate']) && $request['paginate'] != null)
+                $paginate = $request['paginate'];
+            try {
+                $paginado =  $this->$MODEL_NAME_CAMEL$Repository->filtro($filter, $orderBy, $direction, $paginate);
+                return response()->json($paginado, 200);
+            }catch (QueryException $e){
+                return response()->json([
+                    'message' => trans('msgs.msg_error_filter_column_no_exist'),
+                    'type' => trans('msgs.type_error')
+                ], 500);
+            }
+
+        }
+
+    $DOC_STORE$
+    public function store($MODEL_NAME$Request $request)
+    {
+        try{
+            $input = $request->all();
+            //Creando $MODEL_NAME$ en la bd
+            $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->create($input);
+
+            return response()->json([
+                'message' => trans('msgs.msg_el_save_successfully',['var'=>trans_choice('msgs.label_$MODEL_NAME_CAMEL$', 1)]),
+                'type' => trans('msgs.type_success'),
+                'object' => $$MODEL_NAME_CAMEL$
+            ], 201);
+
+        }catch (\Exception $e){
+            return response()->json([
+                'message' => trans('msgs.msg_error_contact_the_adminitrator'),
+                'type'=>trans('msgs.type_error')
+            ], 500);
+        }
+    }
+
+    $DOC_SHOW$
+    public function show($id)
+    {
+        try{
+            $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
+            return response()->json(['data'=>$$MODEL_NAME_CAMEL$], 200);
+        }catch (ModelNotFoundException $e) {
+            return response()->json([
+                'message' => trans('msgs.msg_el_no_found', ['var' => trans_choice('msgs.label_$MODEL_NAME_CAMEL$', 1)]),
+                'type' => trans('msgs.type_error')
+            ], 404);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => trans('msgs.msg_error_contact_the_adminitrator'),
+                'type' => trans('msgs.type_error')
+            ], 500);
+        }
+    }
+
+    $DOC_UPDATE$
+    public function update($id, $MODEL_NAME$Request $request)
+    {
+        try{
+            $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
+            $input = $request->all();
+
+            //Actualizando el $MODEL_NAME_CAMEL$ en la bd
+            $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->update($input, $id);
+
+            return response()->json([
+                'message' => trans('msgs.msg_el_update_successfully',['var'=>trans_choice('msgs.label_$MODEL_NAME_CAMEL$', 1)]),
+                'type'=>trans('msgs.type_success')
+            ], 200);
+
+        }catch (ModelNotFoundException $e){
+            return response()->json([
+                'message' => trans('msgs.msg_el_no_found',['var' => trans_choice('msgs.label_$MODEL_NAME_CAMEL$', 1)]),
+                'type' => trans('msgs.type_error')
+            ],404);
+        }catch (\Exception $e){
+            return response()->json([
+                'message' => trans('msgs.msg_error_contact_the_adminitrator'),
+                'type'=>trans('msgs.type_error')
+            ], 500);
+        }
+    }
+
+    $DOC_DESTROY$
+    public function destroy($id)
+    {
+        try{
+            //Comprobando que exista el $MODEL_NAME_CAMEL$ en la bd
+            $$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
+            //Eliminando
+            $this->$MODEL_NAME_CAMEL$Repository->delete($id);
+
+            return response()->json(['message' => trans('msgs.msg_el_delete_successfully',['var'=>trans_choice('msgs.label_$MODEL_NAME_CAMEL$', 1)]),'type'=>trans('msgs.type_success')], 200);
+        }catch (ModelNotFoundException $e){
+            return response()->json([
+                'message' => trans('msgs.msg_el_no_found',['var' => trans_choice('msgs.label_$MODEL_NAME_CAMEL$', 1)]),
+                'type' => trans('msgs.type_error')
+            ],404);
+        }catch (\Exception $e){
+            return response()->json([
+                'message' => trans('msgs.msg_error_contact_the_adminitrator'),
+                'type'=>trans('msgs.type_error')
+            ], 500);
+        }
+    }
+}

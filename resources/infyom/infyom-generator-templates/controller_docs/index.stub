@@ -1,0 +1,35 @@
+/**
+     * @param Request $request
+     * @return Response
+     *
+     * @OA\Get(
+     *      path="/v1/MODULO/$MODEL_NAME_PLURAL_CAMEL$",
+     *      summary="Get a listing of the $MODEL_NAME_PLURAL$.",
+     *      tags={"$MODEL_NAME$"},
+     *      description="Get all $MODEL_NAME_PLURAL$",
+       *      @OA\Response(
+       *         response="200",
+       *         description="ok",
+       *         content={
+       *             @OA\MediaType(
+       *                 mediaType="application/json",
+       *                 @OA\Schema(
+       *                     @OA\Property(
+       *                         property="success",
+       *                         type="boolean"
+       *                     ),
+       *                     @OA\Property(
+       *                         property="data",
+       *                         type="array",
+       *                         @OA\Items(ref="#/components/schemas/$MODEL_NAME$")
+       *                      ),
+       *                      @OA\Property(
+       *                          property="message",
+       *                          type="string"
+       *                      )
+       *                 )
+       *             )
+       *         }
+       *     )
+     * )
+     */

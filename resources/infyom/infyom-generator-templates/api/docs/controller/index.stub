@@ -1,0 +1,27 @@
+ /**
+  * @param Request $request
+  * @return Response
+  *
+  * @SWG\Get(
+  *      path="/v1/MODULO/$MODEL_NAME_PLURAL_CAMEL$",
+  *      summary="Obtiene un listado de $MODEL_NAME_PLURAL$.",
+  *      tags={"$MODEL_NAME$"},
+  *      description="Obtiene todas las $MODEL_NAME_PLURAL$",
+  *      @SWG\Response(
+  *          response=200,
+  *          description="Operacion Exitosa",
+  *          @SWG\Schema(
+  *              type="object",
+  *              @SWG\Property(
+  *                  property="data",
+  *                  type="array",
+  *                  @SWG\Items(ref="#/definitions/$MODEL_NAME$")
+  *              )
+  *          )
+  *      ),
+  *      @SWG\Response(
+  *         response=401,
+  *         description="Accion no autorizada",
+  *     )
+  * )
+  */
